@@ -1,0 +1,5 @@
+course_to_take columns:
+CourseName QuarterOffered Units Difficulty Pre-Reqs(CSV) 
+
+courses_take columns:
+CourseName Year QuarterTaken Difficulty

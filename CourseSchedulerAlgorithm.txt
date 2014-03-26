@@ -1,0 +1,41 @@
+﻿Course Scheduler Algorithm
+
+
+Ideologies/Goals:
+- An optimized schedule is a schedule with the lowest variance in difficulty.
+- An ideal schedules courses as early as possible.
+
+
+Course Scheduler Algorithm:
+
+The algorithm will run as follows: 
+First, the average difficulty d’ will be calculated. Then the course schedule shall be planned (“Ordinary Course Schedule Planning”) with 
+the constraint that each quarter’s total difficulty is less than or equal to d’. Therefore d’ is a lowerbound l’. 
+
+
+If there are remaining courses R, the course scheduling algorithm shall be run on them but it shall be slightly augmented as follows:
+i = 0.
+l’ shall be updated to be l’ + diff(ByDifficulty(R)[|R| - 1 - i]), given c is the least difficult course. 
+If the course schedule cannot be completely planned with the update, the changes with the updated l’ shall be scrapped and l’ 
+shall be updated to l’ + diff(ByDifficulty(R)[|R| - 1 - i]) with i++. This shall continue until a complete course schedule can be planned. 
+
+
+“Ordinary Course Schedule Planning” (Sub-algorithm):
+Course schedule planning is a sub algorithm that will run as follows. Each course c shall have a “pre-requisite score” p. 
+This score shall be computed as follows:
+ 
+calculatePreReqScore ( c ):
+        make set C of preReqs
+        if | C |  == 0 
+return 0
+        return | C |  + foreach c’ in C { calculatePreReqScore (c’ }:
+
+
+The courses shall be arranged by preReqScore (by preReqs taken, then by preReqScore then by asc - diff, then by desc units,). 
+The course with highest preReqScore shall be scheduled into the first available quarter given that its preReq’s have been 
+previously scheduled.
+
+Things to Consider:
+Verify correctness of algorithm?
+What shall be done if a complete course schedule cannot be planned?
+Running time?
